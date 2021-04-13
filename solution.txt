@@ -1,0 +1,21 @@
+# Dockerized app complete
+# Upload to ECR
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 003235076673.dkr.ecr.us-east-1.amazonaws.com
+docker tag 565a6458e359 003235076673.dkr.ecr.us-east-1.amazonaws.com/evergreen-app
+docker push 003235076673.dkr.ecr.us-east-1.amazonaws.com/evergreen-app
+
+for reference:
+https://medium.com/teamzerolabs/node-js-monitoring-with-prometheus-grafana-3056362ccb80
+
+# Deploy nodejs app
+kubectl apply -f evergreen-app-deployment.yaml
+
+# Deploy modified prometheus deployment
+kubectl apply -f prometheus-deployment.yaml
+
+# Only configuration needed is to be done in the grafana UI
+
+# Helm install using value files, secret needs to be installed before grafana
+
+helm install helm-prometheus prometheus-community/prometheus --values helm-values-prometheus.yaml
+helm install helm-grafana grafana/grafana --values helm-values-grafana.yaml
