@@ -14,6 +14,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh """
+                aws eks --region us-east-1 update-kubeconfig --name tinker-cluster
                 kubectl config get-contexts
                 helm upgrade evergreen-helm ./evergreen-chart  && 
                 helm upgrade helm-grafana grafana/grafana --values ./helm-values-grafana.yaml &&
