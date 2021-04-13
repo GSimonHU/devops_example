@@ -13,7 +13,11 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'echo Deploy'
+                sh """
+                helm upgrade evergreen-helm && 
+                helm upgrade helm-grafana --values ./helm-values-grafana.yaml &&
+                helm upgrade helm-prometheus --values ./helm-values-prometheus.yaml
+                """
             }
         }
     }
