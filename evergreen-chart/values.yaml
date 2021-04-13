@@ -1,0 +1,21 @@
+# Default values for evergreen-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+name: "evergreen-app-deployment"
+service_name: "evergreen-app-service"
+
+replicaCount: 1
+
+containerPort: 8080
+
+image:
+  repository: 003235076673.dkr.ecr.us-east-1.amazonaws.com/evergreen-app
+
+service:
+  type: LoadBalancer
+  port: 8080
+  targetPort: 8080
+
+labels:
+  app: "evergreen-app"

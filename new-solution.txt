@@ -1,0 +1,2 @@
+# Deploy evergreen-app with helm
+helm install evergreen-helm ./evergreen-chart/
