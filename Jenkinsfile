@@ -14,9 +14,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh """
-                helm upgrade evergreen-helm && 
-                helm upgrade helm-grafana --values ./helm-values-grafana.yaml &&
-                helm upgrade helm-prometheus --values ./helm-values-prometheus.yaml
+                helm upgrade evergreen-helm ./evergreen-chart  && 
+                helm upgrade helm-grafana grafana/grafana --values ./helm-values-grafana.yaml &&
+                helm upgrade helm-prometheus prometheus-community/prometheus --values ./helm-values-prometheus.yaml
                 """
             }
         }
