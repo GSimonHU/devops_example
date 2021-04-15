@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        GRAFANA_USERNAME="evergreen"
-        GRAFANA_PASSOWRD="password"
+        GRAFANA_USERNAME=credentials("GRAFANA_USERNAME")
+        GRAFANA_PASSOWRD=credentials("GRAFANA_PASSOWRD")
     }
 
     stages {
